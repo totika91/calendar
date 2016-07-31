@@ -4,5 +4,5 @@ console.log("nesto o meni 2");
 console.log("n1 o meni 2");
 
 $(document).ready(function(){
-	$('h1').text('a;ojksdfns');
+	$('h1').text('Tot breeee');
 });
