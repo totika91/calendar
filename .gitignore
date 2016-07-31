@@ -1,0 +1,12 @@
+##############
+*.7z
+*.iso
+*.zip
+*.jar
+*.log
+
+
+node_modules/
+bower_components/
+.sass-cache
+*.css.map
