@@ -25,8 +25,6 @@ gulp.task('html',function(){
 // scripts 
 // //////////////////////////
 
-
-
 gulp.task('scripts', function(){
 	gulp.src(['app/js/**/*.js', '!app/js/**/*.min.js'])
 	.pipe(plumber())
@@ -39,6 +37,7 @@ gulp.task('scripts', function(){
 // //////////////////////////
 // watch
 // //////////////////////////
+
 gulp.task('watch', function(){
 	gulp.watch('app/js/**/*.js',['scripts']);
 	gulp.watch('app/scss/**/*.scss',['compass']);
@@ -49,6 +48,7 @@ gulp.task('watch', function(){
 // //////////////////////////
 // compas - sass
 // //////////////////////////
+
 gulp.task('compass', function(){
 	gulp.src('app/scss/style.scss')
 	.pipe(plumber())
@@ -67,6 +67,34 @@ gulp.task('compass', function(){
 // build
 // //////////////////////////
 
+// clean build
+
+gulp.task('build:clearfolder', function(cb){
+	del([
+		'build/**'
+		],cb);
+});
+
+
+// create build 
+gulp.task('build:copy', function(){
+	return gulp.src('app/**/*/')
+	.pipe(gulp.dest('build/'));
+});
+
+//remove unwanted build files
+gulp.task('build:remove', ['build:copy'], function(cb){
+	del([
+		'build/scss',
+		'build/js/!(*.min.js)',
+		'build/bower_components/',
+		'build/bower.json'
+		], cb);
+});
+
+gulp.task('build', ['build:copy','build:remove']);
+
+
 
 // //////////////////////////
 // browser sync
@@ -76,6 +104,16 @@ gulp.task('browser-sync',function(){
 	browserSync({
 		server:{
 			baseDir: "./app/"
+		}
+	});
+});
+
+// task to run build server for testing final app
+
+gulp.task('build:serve',function(){
+	browserSync({
+		server:{
+			baseDir: "./build/"
 		}
 	});
 });
