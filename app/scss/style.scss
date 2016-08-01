@@ -1,9 +1,7 @@
-.proba{
-	color: blue;
-}
-body{
-	background: #666666;
-}
-.container{
-	height: 2200px;
-}
+/***** BODY *****/
+@import 'body.scss';
+
+
+/***** HEADER *****/ 
+@import 'header.scss';
+
