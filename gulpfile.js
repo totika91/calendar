@@ -88,7 +88,7 @@ gulp.task('build:remove', ['build:copy'], function(cb){
 		'build/scss',
 		'build/js/!(*.min.js)',
 		'build/bower_components/',
-		'build/bower.json'
+		'build/bower.json',
 		], cb);
 });
 

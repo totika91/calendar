@@ -1,7 +1,7 @@
 (function(){
 	$(document).ready(function(){
 		var h1 = $('<h1></h1>'),
-			backToToday = $('<button>Back to Today</button>'),
+			backToToday = $("<div class='toToday'>Today</div>"),
 			currentMonth = moment().format('MMMM'),
 			currentYear = moment().format('Y'),
 			currentDay = moment().day(),		
@@ -129,6 +129,3 @@
 		});
 	});
 })();
-
-
-
