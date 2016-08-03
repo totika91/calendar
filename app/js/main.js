@@ -64,7 +64,30 @@
 				break;
 			}
 		}
-		firstDayOfMonth();
+		firstDayOfMonth();		
+		function overlaySelect(){
+		$('.singleDay').click(function(){
+				var day = $(this),
+					dayWidth = day.width(),
+					dayHeight = day.height(),
+					dayOffsetTop = day.offset().top,
+					dayOffsetLeft = day.offset().left;
+				if($('.contentWrap').children().length!=4){
+						overlayDiv = $("<div class='selected'></div>");
+						overlayDiv.css({
+							'top': dayOffsetTop+'px',
+							'left': dayOffsetLeft+'px',
+						});		
+						$('.contentWrap').append(overlayDiv);
+				}else{
+					$('.selected').css({
+						'top': dayOffsetTop+'px',
+						'left': dayOffsetLeft+'px',
+					});	
+				}
+			});
+		}
+		overlaySelect();
 
 
 
@@ -97,6 +120,7 @@
 					newCurrentMonth = String(currentMonth+1);
 				
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
+		overlaySelect();
 		
 		});
 
@@ -126,6 +150,7 @@
 			sep = '/',
 			newCurrentMonth = String(currentMonth+1);
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
+		overlaySelect();
 		});
 	});
 })();
