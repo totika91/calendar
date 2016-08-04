@@ -9,9 +9,7 @@
 			
 			$('.backTo').append(h1.text(currentDate));
 
-		function init(leap){
-
-		
+		function init(leap){		
 			if(moment(leap.toString()).isLeapYear()){
 				if(currentMonth==="February"){
 					for (var i = 1; i <= moment().daysInMonth()+1; i++) {
@@ -110,17 +108,24 @@
 
 		currentMonth = parseInt(moment().format('M'))-1;
 		currentYear = parseInt(moment().format('Y'));
+		function leapYear(){
+			if (h1.text()=='February'+' '+currentYear) {
+					if(currentYear%4 == 0)
+					$('.content').append($('<div class="singleDay"></div>').text('29'));
+				}
+		}
 
 		$('.aRight').click(function(){
-			currentMonth+=1;
-			var nextMonth = moment().month(currentMonth).format('MMMM');
-			if (nextMonth == 'January') {
-				currentYear+=1;
-				currentMonth=0;
-			}
-			h1.text(nextMonth+' '+currentYear);
-			$('.singleDay').remove();		
+				currentMonth+=1;
+				var nextMonth = moment().month(currentMonth).format('MMMM');
+				if (nextMonth == 'January') {
+					currentYear+=1;
+					currentMonth=0;
+				}
+				h1.text(nextMonth+' '+currentYear);
+				$('.singleDay').remove();
 
+			
 			for(var i = 1; i <= moment(String(currentMonth+1)).daysInMonth(); i++){
 				var div = $('<div class="singleDay"></div>');
 				$('.content').append(div.text(i));
@@ -132,6 +137,7 @@
 					}
 				}
 			}
+				leapYear();
 				var newCurrentYear = String(currentYear),
 					sep = '/',
 					newCurrentMonth = String(currentMonth+1);
@@ -163,6 +169,7 @@
 					}
 				}
 			}
+			leapYear();
 		var newCurrentYear = String(currentYear),
 			sep = '/',
 			newCurrentMonth = String(currentMonth+1);
