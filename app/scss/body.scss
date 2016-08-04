@@ -42,24 +42,20 @@ body{
 		.backTo{
 			width: 100%;
 			display: flex;
+			justify-content: space-around;
+			align-items: center;
 				h1{
-					margin-left: 20%;
 					color: white;
 					transition: 0.3s;
+					order: -1;
 				}
 				.toToday{
 					width: 100px;
 					height: 20px;
 					background: rgba(255,255,255,0.4);
-					margin: 25px 0 0 350px;
 					text-align: center;
-					color: white;
-					transition: 0.3s;
-					opacity: 0;
-					z-index: -10;
-					cursor: pointer;
 					&:hover{
-						background: rgba(255,255,255,0.6);
+						cursor:pointer;
 					}
 				}
 				._today{

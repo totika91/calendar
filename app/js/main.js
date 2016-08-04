@@ -8,30 +8,28 @@
 			currentDate = moment().format('MMMM')+' '+moment().format('Y');
 			
 			$('.backTo').append(h1.text(currentDate));
-
-		function init(leap){		
-			if(moment(leap.toString()).isLeapYear()){
-				if(currentMonth==="February"){
-					for (var i = 1; i <= moment().daysInMonth()+1; i++) {
-						var div = $('<div class="singleDay"></div>');
-						$('.content').append(div.text(i));
-						if(i == currentDay){
-							$('.singleDay:nth-child(' + i + ')').addClass('current');
+		
+			function init(){	
+				if(moment(currentYear.toString()).isLeapYear()){
+					if(currentMonth==="February"){
+						for (var i = 1; i <= moment().daysInMonth()+1; i++) {
+							var div = $('<div class="singleDay"></div>');
+							$('.content').append(div.text(i));
+							if(i == currentDay){
+								$('.singleDay:nth-child(' + i + ')').addClass('current');
+							}
 						}
-					}
-				}else{
-					for (var i = 1; i <= moment().daysInMonth(); i++) {
-						var div = $('<div class="singleDay"></div>');
-						$('.content').append(div.text(i));
-						if(i == currentDay){
-							$('.singleDay:nth-child(' + i + ')').addClass('current');
+					}else{
+						for (var i = 1; i <= moment().daysInMonth(); i++) {
+							var div = $('<div class="singleDay"></div>');
+							$('.content').append(div.text(i));
+							if(i == currentDay){
+								$('.singleDay:nth-child(' + i + ')').addClass('current');
+							}
 						}
 					}
 				}
-			}
-		}
-		init(currentYear);
-
+			}init();
 		function firstDayOfMonth(arg1,arg2,arg3){
 
 			function add(arg1,arg2,arg3){
@@ -143,7 +141,8 @@
 					newCurrentMonth = String(currentMonth+1);
 				
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
-		overlaySelect();
+		overlaySelect();		
+		toToday(currentYear);
 		
 		});
 
@@ -169,12 +168,22 @@
 					}
 				}
 			}
-			leapYear();
+			leapYear(currentYear);
 		var newCurrentYear = String(currentYear),
 			sep = '/',
 			newCurrentMonth = String(currentMonth+1);
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
 		overlaySelect();
+		toToday();
 		});
+		function toToday(){
+			$('.toToday').click(function(){
+				currentMonth = parseInt(moment().format('M'))-1;
+				currentYear = parseInt(moment().format('Y'));
+				h1.text(moment().format('MMMM')+' '+currentYear);
+				$('.singleDay').remove();
+				init();
+			});
+		}
 	});
 })();
