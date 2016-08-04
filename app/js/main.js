@@ -3,25 +3,36 @@
 		var h1 = $('<h1></h1>'),
 			backToToday = $("<div class='toToday'>Today</div>"),
 			currentMonth = moment().format('MMMM'),
-			currentYear = moment().format('Y'),
+			currentYear = 2016,
 			currentDay = moment().day(),		
 			currentDate = moment().format('MMMM')+' '+moment().format('Y');
-
-
-		function init(){
+			
 			$('.backTo').append(h1.text(currentDate));
-			$('.backTo').append(backToToday);
+
+		function init(leap){
 
 		
-			for (var i = 1; i <= moment().daysInMonth(); i++) {
-					var div = $('<div class="singleDay"></div>');
-					$('.content').append(div.text(i));
-					if(i == currentDay){
-						$('.singleDay:nth-child(' + i + ')').addClass('current');
+			if(moment(leap.toString()).isLeapYear()){
+				if(currentMonth==="February"){
+					for (var i = 1; i <= moment().daysInMonth()+1; i++) {
+						var div = $('<div class="singleDay"></div>');
+						$('.content').append(div.text(i));
+						if(i == currentDay){
+							$('.singleDay:nth-child(' + i + ')').addClass('current');
+						}
 					}
+				}else{
+					for (var i = 1; i <= moment().daysInMonth(); i++) {
+						var div = $('<div class="singleDay"></div>');
+						$('.content').append(div.text(i));
+						if(i == currentDay){
+							$('.singleDay:nth-child(' + i + ')').addClass('current');
+						}
+					}
+				}
 			}
 		}
-		init();
+		init(currentYear);
 
 		function firstDayOfMonth(arg1,arg2,arg3){
 
@@ -88,6 +99,12 @@
 			});
 		}
 		overlaySelect();
+		$('.aRight, .aLeft').click(function(){
+			var selectedExists = $('.selected');
+			if($('.contentWrap').children().length == 4){
+			$($('.contentWrap').children(':last-child')).remove();
+		}
+	});
 
 
 
