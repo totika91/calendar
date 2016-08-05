@@ -10,8 +10,8 @@
 			
 			$('.backTo').append(h1.text(currentDate));
 		
-			function init(curr){
-						for (var i = 1; i <= moment(curr).daysInMonth(); i++) {
+			function init(){
+						for (var i = 1; i <= moment().daysInMonth(); i++) {
 							var div = $('<div class="singleDay"></div>');
 							$('.content').append(div.text(i));
 							if(i == currentDay){
@@ -20,7 +20,7 @@
 						}
 					}
 				
-			init(shortMonth);
+			init();
 		function firstDayOfMonth(arg1,arg2,arg3){
 
 			function add(arg1,arg2,arg3){
@@ -115,8 +115,8 @@
 				h1.text(nextMonth+' '+currentYear);
 				$('.singleDay').remove();
 
-			
-			for(var i = 1; i <= moment(String(currentMonth+1)).daysInMonth(); i++){
+			console.log(currentMonth);
+			for(var i = 1; i <= moment(currentMonth+1).daysInMonth(); i++){
 				var div = $('<div class="singleDay"></div>');
 				$('.content').append(div.text(i));
 
@@ -128,9 +128,9 @@
 				}
 			}
 				leapYear();
-				var newCurrentYear = String(currentYear),
+				var newCurrentYear = parseInt(currentYear),
 					sep = '/',
-					newCurrentMonth = String(currentMonth+1);
+					newCurrentMonth = parseInt(currentMonth+1);
 				
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
 		overlaySelect();		
@@ -149,7 +149,7 @@
 			h1.text(nextMonth+' '+currentYear);
 			$('.singleDay').remove();		
 
-			for(var i = 1; i <= moment(String(currentMonth+1)).daysInMonth(); i++){
+			for(var i = 1; i <= moment(currentMonth+1).daysInMonth(); i++){
 
 				var div = $('<div class="singleDay"></div>');
 				$('.content').append(div.text(i));
@@ -161,9 +161,9 @@
 				}
 			}
 			leapYear(currentYear);
-		var newCurrentYear = String(currentYear),
-			sep = '/',
-			newCurrentMonth = String(currentMonth+1);
+				var newCurrentYear = parseInt(currentYear),
+					sep = '/',
+					newCurrentMonth = parseInt(currentMonth+1);
 			console.log(currentYear);
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
 		overlaySelect();
