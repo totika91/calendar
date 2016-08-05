@@ -3,24 +3,15 @@
 		var h1 = $('<h1></h1>'),
 			backToToday = $("<div class='toToday'>Today</div>"),
 			currentMonth = moment().format('MMMM'),
+			shortMonth = moment().format('MMMM Y');
 			currentYear = 2016,
 			currentDay = moment().day(),		
 			currentDate = moment().format('MMMM')+' '+moment().format('Y');
 			
 			$('.backTo').append(h1.text(currentDate));
 		
-			function init(){	
-				if(moment(currentYear.toString()).isLeapYear()){
-					if(currentMonth==="February"){
-						for (var i = 1; i <= moment().daysInMonth()+1; i++) {
-							var div = $('<div class="singleDay"></div>');
-							$('.content').append(div.text(i));
-							if(i == currentDay){
-								$('.singleDay:nth-child(' + i + ')').addClass('current');
-							}
-						}
-					}else{
-						for (var i = 1; i <= moment().daysInMonth(); i++) {
+			function init(curr){
+						for (var i = 1; i <= moment(curr).daysInMonth(); i++) {
 							var div = $('<div class="singleDay"></div>');
 							$('.content').append(div.text(i));
 							if(i == currentDay){
@@ -28,8 +19,8 @@
 							}
 						}
 					}
-				}
-			}init();
+				
+			init(shortMonth);
 		function firstDayOfMonth(arg1,arg2,arg3){
 
 			function add(arg1,arg2,arg3){
@@ -112,6 +103,7 @@
 					$('.content').append($('<div class="singleDay"></div>').text('29'));
 				}
 		}
+		leapYear();
 
 		$('.aRight').click(function(){
 				currentMonth+=1;
@@ -172,18 +164,27 @@
 		var newCurrentYear = String(currentYear),
 			sep = '/',
 			newCurrentMonth = String(currentMonth+1);
+			console.log(currentYear);
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
 		overlaySelect();
 		toToday();
 		});
 		function toToday(){
 			$('.toToday').click(function(){
+				$('.selected').remove();
 				currentMonth = parseInt(moment().format('M'))-1;
 				currentYear = parseInt(moment().format('Y'));
 				h1.text(moment().format('MMMM')+' '+currentYear);
 				$('.singleDay').remove();
 				init();
+				overlaySelect();
 			});
 		}
+		$("#submit").submit(function(e){		
+			$('.singleDay').remove();
+			var inputText = $('input').val();
+			
+			e.preventDefault();
+		});
 	});
 })();
