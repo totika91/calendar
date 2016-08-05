@@ -21,13 +21,9 @@
 					}
 				
 			init();
-		function firstDayOfMonth(arg1,arg2,arg3){
+		function firstDayOfMonth(arg1,arg2,arg3){		
 
-			function add(arg1,arg2,arg3){
-				return arg1+arg2+arg3;
-			}
-
-			var startOfMonthDay = moment(add(arg1,arg2,arg3)).startOf('month').format('llll').substr(0,3);
+			var startOfMonthDay = moment(arg1+arg2+arg3).startOf('month').format('llll').substr(0,3);
 			
 			switch(startOfMonthDay){
 				case 'Tue':
@@ -97,13 +93,12 @@
 
 		currentMonth = parseInt(moment().format('M'))-1;
 		currentYear = parseInt(moment().format('Y'));
-		function leapYear(){
+		/*function leapYear(){
 			if (h1.text()=='February'+' '+currentYear) {
 					if(currentYear%4 == 0)
 					$('.content').append($('<div class="singleDay"></div>').text('29'));
 				}
-		}
-		leapYear();
+		}*/
 
 		$('.aRight').click(function(){
 				currentMonth+=1;
@@ -114,9 +109,8 @@
 				}
 				h1.text(nextMonth+' '+currentYear);
 				$('.singleDay').remove();
-
-			console.log(currentMonth);
-			for(var i = 1; i <= moment(currentMonth+1).daysInMonth(); i++){
+				console.log(currentMonth);
+			for(var i = 1; i <= moment(+currentYear+'-'+String(currentMonth+1)).daysInMonth(); i++){
 				var div = $('<div class="singleDay"></div>');
 				$('.content').append(div.text(i));
 
@@ -127,10 +121,10 @@
 					}
 				}
 			}
-				leapYear();
-				var newCurrentYear = parseInt(currentYear),
-					sep = '/',
-					newCurrentMonth = parseInt(currentMonth+1);
+				//leapYear();
+				var newCurrentYear = String(currentYear),
+					sep = '-',
+					newCurrentMonth = String(currentMonth+1);
 				
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
 		overlaySelect();		
@@ -149,7 +143,7 @@
 			h1.text(nextMonth+' '+currentYear);
 			$('.singleDay').remove();		
 
-			for(var i = 1; i <= moment(currentMonth+1).daysInMonth(); i++){
+			for(var i = 1; i <= moment(+currentYear+'-'+String(currentMonth+1)).daysInMonth(); i++){
 
 				var div = $('<div class="singleDay"></div>');
 				$('.content').append(div.text(i));
@@ -160,11 +154,10 @@
 					}
 				}
 			}
-			leapYear(currentYear);
-				var newCurrentYear = parseInt(currentYear),
-					sep = '/',
-					newCurrentMonth = parseInt(currentMonth+1);
-			console.log(currentYear);
+			//leapYear(currentYear);
+				var newCurrentYear = String(currentYear),
+					sep = '-',
+					newCurrentMonth = String(currentMonth+1);
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
 		overlaySelect();
 		toToday();
