@@ -5,13 +5,14 @@
 			currentMonth = moment().format('MMMM'),
 			shortMonth = moment().format('MMMM Y');
 			currentYear = 2016,
-			currentDay = moment().day(),		
+			currentDay = moment().day(),			
+			sep = '-',	
 			currentDate = moment().format('MMMM')+' '+moment().format('Y');
 			
 			$('.backTo').append(h1.text(currentDate));
 		
-			function init(){
-						for (var i = 1; i <= moment().daysInMonth(); i++) {
+			function init(month){
+						for (var i = 1; i <= moment().month(month).daysInMonth(); i++) {
 							var div = $('<div class="singleDay"></div>');
 							$('.content').append(div.text(i));
 							if(i == currentDay){
@@ -20,7 +21,7 @@
 						}
 					}
 				
-			init();
+			init(currentMonth);
 		function firstDayOfMonth(arg1,arg2,arg3){		
 
 			var startOfMonthDay = moment(arg1+arg2+arg3).startOf('month').format('llll').substr(0,3);
@@ -57,6 +58,7 @@
 					});
 				break;
 			}
+			console.log(arg1,arg2,arg3);
 		}
 		firstDayOfMonth();		
 		function overlaySelect(){
@@ -123,7 +125,6 @@
 			}
 				//leapYear();
 				var newCurrentYear = String(currentYear),
-					sep = '-',
 					newCurrentMonth = String(currentMonth+1);
 				
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
@@ -131,7 +132,6 @@
 		toToday(currentYear);
 		
 		});
-
 
 		$('.aLeft').click(function(){
 			currentMonth-=1;
@@ -156,7 +156,6 @@
 			}
 			//leapYear(currentYear);
 				var newCurrentYear = String(currentYear),
-					sep = '-',
 					newCurrentMonth = String(currentMonth+1);
 		firstDayOfMonth(newCurrentYear,sep,newCurrentMonth);
 		overlaySelect();
@@ -169,15 +168,23 @@
 				currentYear = parseInt(moment().format('Y'));
 				h1.text(moment().format('MMMM')+' '+currentYear);
 				$('.singleDay').remove();
-				init();
+				init(currentMonth);
 				overlaySelect();
 			});
 		}
 		$("#submit").submit(function(e){		
 			$('.singleDay').remove();
 			var inputText = $('input').val();
-			
-			e.preventDefault();
+			var thisSearch = moment().month(inputText).format('M');
+			init(inputText);
+			var godina = '2016';
+			var sep = '-';
+			h1.text(moment().month(inputText).format('MMMM'));
+
+			firstDayOfMonth(godina,sep,thisSearch);
+			overlaySelect();
+			toToday();
+			e.preventDefault();	
 		});
 	});
 })();
